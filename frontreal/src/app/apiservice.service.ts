@@ -11,7 +11,7 @@ export class ApiserviceService {
    }
 
    //connect frontend to backend
-   apiurl = 'http://localhost:3300/user';
+   apiurl = 'http://localhost:3300/products';
    cpiurl = 'http://localhost:3300/categories';
 
    //get all data

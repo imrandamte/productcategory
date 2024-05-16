@@ -1,12 +1,11 @@
 const express=require('express');
-const bodyparser=require('body-parser');
 const cors=require('cors');
 const mysql=require('mysql2');
 
 const app = express();
 
 app.use(cors());
-app.use(bodyparser.json());
+app.use(express.json());
 
 //database connection
 const db = mysql.createConnection({
@@ -22,7 +21,7 @@ db.connect(err=>{
     console.log('database connected...');
 })
 //get data
-/*app.get('/user',(req,res)=>{
+/*app.get('/products',(req,res)=>{
     
     let qr = 'select * from productlist';
     db.query(qr,(err,result)=>{
@@ -38,7 +37,7 @@ db.connect(err=>{
     })
 })*/
 //get single data
-app.get('/user/:id',(req,res)=>{
+app.get('/products/:id',(req,res)=>{
     
     let gID = req.params.id;
     let qr = `select * from products where productid =${gID}`;
@@ -59,7 +58,7 @@ app.get('/user/:id',(req,res)=>{
     })
 })
 // Get paginated data
-app.get('/user', (req, res) => {
+app.get('/products', (req, res) => {
     const page = parseInt(req.query.page) || 1 ;
     const pageSize = parseInt(req.query.pageSize) || 10 ;
 
@@ -95,7 +94,7 @@ app.get('/user', (req, res) => {
 
 
 
-app.post('/user',(req,res)=>{
+app.post('/products',(req,res)=>{
     console.log(req.body,'createdata');
 
     let productid =req.body.productid;
@@ -115,7 +114,7 @@ app.post('/user',(req,res)=>{
             })
 })
 //update data
-app.put('/user/:id',(req,res)=>{
+app.put('/products/:id',(req,res)=>{
     console.log(req.body,'updatedata');
 
     let gID=req.params.id;
@@ -137,7 +136,7 @@ app.put('/user/:id',(req,res)=>{
     })
 })
 //delete data
-app.delete('/user/:id',(req,res)=>{
+app.delete('/products/:id',(req,res)=>{
     let qID=req.params.id;
     let qr=`delete from products where productid='${qID}' `;
 
